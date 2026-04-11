@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #ffffff);
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            width: 400px;
+            margin: 100px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .username {
+            font-weight: bold;
+            color: #2196f3;
+        }
+
+        .role {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            background: #d32f2f;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <h2>Dashboard</h2>
+
+        <p>Welcome <span class="username">{{ request.user.username }}</span></p>
+        <p>Your role: <span class="role">{{ profile.role }}</span></p>
+
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+</body>
+</html>

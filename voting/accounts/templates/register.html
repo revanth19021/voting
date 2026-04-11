@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #ffffff);
+            margin: 0;
+            padding: 0;
+        }
+
+        .register-container {
+            width: 380px;
+            margin: 80px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+        }
+
+        input, select {
+            width: 95%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #00acc1;
+            box-shadow: 0 0 5px rgba(0,172,193,0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #00acc1;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #008b9a;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        a {
+            color: #00acc1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="register-container">
+        <h2>Register</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label>Username:</label>
+            <input type="text" name="username" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" required>
+
+            <label>Role:</label>
+            <select name="role">
+                <option value="voter">Voter</option>
+                <option value="admin">Admin</option>
+            </select>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p>Already have an account? 
+            <a href="{% url 'login' %}">Login</a>
+        </p>
+    </div>
+
+</body>
+</html>
