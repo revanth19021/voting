@@ -2,9 +2,16 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+
 from .models import Profile
 # Create your views here.
+
+
+def home(request):
+    return render(request, 'home.html')
 
 
 def register_view(request):
@@ -13,7 +20,7 @@ def register_view(request):
         password=request.POST.get('password')
         role=request.POST.get('role')
         if User.objects.filter(username=username).exists():
-            return render(request, 'accounts/register.html', {'error': 'Username already exists'})
+            return render(request, 'register.html', {'error': 'Username already exists'})
         
         user=User.objects.create_user(
             username=username,
@@ -48,4 +55,29 @@ def logout_view(request):
 def dashboard(request):
     profile=request.user.profile
     return render(request,'dashboard.html',{'profile':profile})
-    
+
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        address = request.POST.get('address')
+
+        user = request.user
+        profile = user.profile
+
+        # update password
+        if password:
+            user.password = make_password(password)
+            user.save()
+
+            # 🔥 THIS LINE FIXES YOUR ISSUE
+            update_session_auth_hash(request, user)
+
+        # update address
+        profile.address = address
+        profile.save()
+
+        return redirect('dashboard')
+
+    return render(request, 'update_profile.html')

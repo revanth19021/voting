@@ -8,14 +8,49 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa, #ffffff);
+            background: #f4f6f9;
             margin: 0;
-            padding: 0;
         }
 
+        /* 🔷 Navbar */
+        .navbar {
+            background: #2c3e50;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .navbar-left {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-right span {
+            margin-right: 15px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* 🔷 Container */
         .dashboard-container {
             width: 400px;
-            margin: 100px auto;
+            margin: 80px auto;
             background: #fff;
             padding: 30px;
             border-radius: 12px;
@@ -25,13 +60,6 @@
 
         h2 {
             color: #333;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 16px;
-            color: #555;
-            margin: 10px 0;
         }
 
         .username {
@@ -44,32 +72,59 @@
             color: #4CAF50;
         }
 
-        a {
-            display: inline-block;
-            margin-top: 20px;
+        /* 🔷 Buttons */
+        .btn {
+            display: block;
+            margin: 15px auto;
             text-decoration: none;
-            background: #f44336;
-            color: white;
             padding: 10px 20px;
             border-radius: 8px;
-            transition: 0.3s;
+            color: white;
+            width: 70%;
         }
 
-        a:hover {
-            background: #d32f2f;
+        .btn-election {
+            background: #2196f3;
+        }
+
+        .btn-logout {
+            background: #f44336;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
 
 <body>
 
+    <!-- 🔷 Navbar -->
+    <div class="navbar">
+        <div class="navbar-left">Voting System</div>
+
+        <div class="navbar-right">
+            <span>Hi, {{ request.user.username }}</span>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <a href="/elections/">Elections</a>
+            <a href="{% url 'update_profile' %}">Update Profile</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
+
+    <!-- 🔷 Dashboard Content -->
     <div class="dashboard-container">
         <h2>Dashboard</h2>
 
         <p>Welcome <span class="username">{{ request.user.username }}</span></p>
         <p>Your role: <span class="role">{{ profile.role }}</span></p>
 
-        <a href="{% url 'logout' %}">Logout</a>
+        <!-- 🔥 Actions -->
+        <a href="/elections/" class="btn btn-election">View Elections</a>
+
+        <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>
     </div>
 
 </body>

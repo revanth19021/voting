@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Elections</title>
-    <style>
+    <title>Results</title>
+   <style>
 body { font-family: Arial; margin: 0; background: #f4f6f9; }
 
 .navbar {
@@ -39,7 +39,6 @@ body { font-family: Arial; margin: 0; background: #f4f6f9; }
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
     <div class="navbar-left">Voting System</div>
 
@@ -53,24 +52,15 @@ body { font-family: Arial; margin: 0; background: #f4f6f9; }
 </div>
 
 <div style="padding:30px;">
-    <h2>Available Elections</h2>
+    <h2>Results - {{ election.title }}</h2>
 
-    <div style="display:flex; flex-wrap:wrap; gap:20px;">
-        {% for election in elections %}
-        <div style="width:250px; background:white; padding:10px; border-radius:10px;">
-            <img src="https://source.unsplash.com/300x200/?vote" width="100%">
-
-            <h3>{{ election.title }}</h3>
-
-            <a href="{% url 'candidate_list' election.id %}">See Candidates</a>
-
-            {% if request.user.profile.role == 'admin' %}
-            <br>
-            <a href="{% url 'results' election.id %}">Results</a>
-            {% endif %}
-        </div>
+    <ul>
+        {% for item in results %}
+            <li>{{ item.candidate.name }} - {{ item.votes }} votes</li>
         {% endfor %}
-    </div>
+    </ul>
+
+    <a href="{% url 'election_list' %}">Back</a>
 </div>
 
 </body>

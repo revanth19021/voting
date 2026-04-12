@@ -10,6 +10,7 @@ class Profile(models.Model):
     ],
                           default='voter'
     )
+    address = models.TextField(blank=True, null=True)
     def __str__(self):
         return self.user.username
     

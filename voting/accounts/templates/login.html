@@ -34,13 +34,6 @@
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 8px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            border-color: #2196f3;
-            box-shadow: 0 0 5px rgba(33,150,243,0.5);
         }
 
         button {
@@ -51,39 +44,53 @@
             color: white;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #0b7dda;
         }
 
         .error {
             color: red;
-            margin-top: 10px;
+        }
+
+        /* 🔥 Register Button Style */
+        .register-btn {
+            display: block;
+            margin-top: 15px;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .register-btn:hover {
+            background: #388e3c;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="login-container">
-        <h2>Login</h2>
+<div class="login-container">
+    <h2>Login</h2>
 
-        <form method="post">
-            {% csrf_token %}
+    <form method="post">
+        {% csrf_token %}
 
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
 
-            <button type="submit">Login</button>
-        </form>
+        <button type="submit">Login</button>
+    </form>
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-    </div>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    
+    <a href="{% url 'register' %}" class="register-btn">
+        New User? Register Here
+    </a>
+
+</div>
 
 </body>
 </html>
