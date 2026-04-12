@@ -2,43 +2,119 @@
 <html>
 <head>
     <title>Candidates</title>
+
     <style>
-body { font-family: Arial; margin: 0; background: #f4f6f9; }
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f4f6f9;
+        }
 
-.navbar {
-    background: #2c3e50;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-}
+        /* 🔷 Navbar */
+        .navbar {
+            background: #2c3e50;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
 
-.navbar-left {
-    font-size: 18px;
-    font-weight: bold;
-}
+        .navbar-left {
+            font-size: 18px;
+            font-weight: bold;
+        }
 
-.navbar-right {
-    display: flex;
-    align-items: center;
-}
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
 
-.navbar-right span {
-    margin-right: 15px;
-}
+        .navbar-right span {
+            margin-right: 15px;
+        }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin-left: 15px;
-    font-weight: bold;
-}
-</style>
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        /* 🔷 Container */
+        .container {
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        /* 🔷 Cards Layout */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            width: 260px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin: 10px 0;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .vote-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: green;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .vote-btn:hover {
+            background: darkgreen;
+        }
+
+        .message {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
 
+<!-- 🔷 Navbar -->
 <div class="navbar">
     <div class="navbar-left">Voting System</div>
 
@@ -51,26 +127,43 @@ body { font-family: Arial; margin: 0; background: #f4f6f9; }
     </div>
 </div>
 
-<div style="padding:30px;">
+<div class="container">
     <h2>{{ election.title }}</h2>
 
     {% if already_voted %}
-        <p style="color:green;">You already voted</p>
+        <p class="message">✅ You have already voted in this election</p>
     {% endif %}
 
-    <ul>
+    <div class="card-container">
+
         {% for candidate in candidates %}
-        <li>
-            {{ candidate.name }}
+        <div class="card">
 
-            {% if not already_voted %}
-                <a href="{% url 'vote' candidate.id %}">Vote</a>
-            {% endif %}
-        </li>
+            <!-- 🖼️ Candidate Image -->
+            <img src="https://source.unsplash.com/300x200/?person,leader" alt="Candidate">
+
+            <div class="card-content">
+                <h3>{{ candidate.name }}</h3>
+
+                
+                <p>Party: Independent</p>
+                <p>Experience: 5+ Years</p>
+
+                {% if not already_voted %}
+                    <a href="{% url 'vote' candidate.id %}" class="vote-btn">
+                        Vote
+                    </a>
+                {% endif %}
+            </div>
+        </div>
         {% endfor %}
-    </ul>
 
-    <a href="{% url 'election_list' %}">Back</a>
+    </div>
+
+    <br><br>
+    <div style="text-align:center;">
+        <a href="{% url 'election_list' %}">⬅ Back to Elections</a>
+    </div>
 </div>
 
 </body>
