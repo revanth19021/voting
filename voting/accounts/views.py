@@ -1,13 +1,18 @@
 from django.shortcuts import render,redirect
+
 from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate,login,logout
+
 from django.contrib.auth.hashers import make_password
+
 from django.contrib.auth.decorators import login_required
+
 from django.contrib.auth import update_session_auth_hash
 
+from elections.models import Election, Candidate
+
 from .models import Profile
-# Create your views here.
 
 
 def home(request):
@@ -39,10 +44,17 @@ def login_view(request):
         user=authenticate(request,username=username,password=password)
         
         if user is not None:
-            login(request,user)
-            return redirect('dashboard')
+            login(request, user)
+            
+            profile, created = Profile.objects.get_or_create(user=user)
+            if user.profile.role == 'admin':
+                return redirect('admin_dashboard') 
+            else:
+                return redirect('dashboard') 
+
         else:
-            return render(request,'login.html',{'error':'Invalid Credentials'})
+            return render(request, 'login.html', {'error': 'Invalid Credentials'})
+
     return render(request,'login.html')
     
     
@@ -66,18 +78,36 @@ def update_profile(request):
         user = request.user
         profile = user.profile
 
-        # update password
         if password:
             user.password = make_password(password)
             user.save()
 
-            # 🔥 THIS LINE FIXES YOUR ISSUE
             update_session_auth_hash(request, user)
 
-        # update address
         profile.address = address
         profile.save()
 
         return redirect('dashboard')
 
     return render(request, 'update_profile.html')
+
+
+def about(request):
+    return render(request,'about.html')
+
+def contact(request):
+    return render(request,'contact.html')
+
+
+
+
+@login_required
+def admin_dashboard(request):
+    if request.user.profile.role != 'admin':
+        return redirect('dashboard')
+
+    elections = Election.objects.all()
+
+    return render(request, 'admin_dashboard.html', {
+        'elections': elections
+    })

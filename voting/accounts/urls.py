@@ -8,5 +8,7 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('dashboard/', dashboard, name='dashboard'),
     path('update-profile/', update_profile, name='update_profile'),
+    path('about/',about,name='about'),
+    path('contact/',contact,name='contact'),
 ]
 

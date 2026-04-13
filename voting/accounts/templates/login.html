@@ -10,12 +10,28 @@
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #dfe9f3, #ffffff);
             margin: 0;
-            padding: 0;
         }
 
+        /* 🔷 Navbar */
+        .navbar {
+            background: #2c3e50;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            color: white;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+
+        /* 🔷 Login Box */
         .login-container {
             width: 350px;
-            margin: 100px auto;
+            margin: 80px auto;
             background: #fff;
             padding: 30px;
             border-radius: 12px;
@@ -23,17 +39,12 @@
             text-align: center;
         }
 
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-
         input {
             width: 90%;
             padding: 10px;
             margin: 10px 0;
-            border: 1px solid #ccc;
             border-radius: 8px;
+            border: 1px solid #ccc;
         }
 
         button {
@@ -50,10 +61,9 @@
             color: red;
         }
 
-        /* 🔥 Register Button Style */
         .register-btn {
             display: block;
-            margin-top: 15px;
+            margin-top: 10px;
             padding: 10px;
             background: #4CAF50;
             color: white;
@@ -61,14 +71,26 @@
             text-decoration: none;
         }
 
-        .register-btn:hover {
-            background: #388e3c;
+        .admin-btn {
+            background: #f44336;
         }
     </style>
 </head>
 
 <body>
 
+<!-- 🔷 Navbar (FIXED POSITION) -->
+<div class="navbar">
+    <div><strong>Voting System</strong></div>
+    <div>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="/elections/">Elections</a>
+    </div>
+</div>
+
+<!-- 🔷 Login Form -->
 <div class="login-container">
     <h2>Login</h2>
 
@@ -84,12 +106,14 @@
     {% if error %}
         <p class="error">{{ error }}</p>
     {% endif %}
-
     
     <a href="{% url 'register' %}" class="register-btn">
         New User? Register Here
     </a>
 
+    <a href="{% url 'login' %}?role=admin" class="register-btn admin-btn">
+        Admin Login
+    </a>
 </div>
 
 </body>

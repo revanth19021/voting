@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Details</title>
+    <title>Contact</title>
 
     <style>
         body {
@@ -47,49 +47,65 @@
             text-decoration: underline;
         }
 
-        /* 🔷 Form Container */
+        /* 🔷 Container */
         .container {
-            width: 400px;
-            margin: 80px auto;
+            max-width: 900px;
+            margin: 50px auto;
+            display: flex;
+            gap: 30px;
+        }
+
+        /* 🔷 Form */
+        .form-box {
+            flex: 1;
             background: white;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         }
 
-        h2 {
-            text-align: center;
+        .form-box h2 {
+            margin-bottom: 20px;
         }
 
         input, textarea {
             width: 100%;
             padding: 10px;
-            margin-top: 5px;
+            margin: 10px 0;
             border-radius: 8px;
             border: 1px solid #ccc;
         }
 
         button {
             width: 100%;
-            margin-top: 15px;
             padding: 10px;
-            background: #4CAF50;
-            color: white;
+            background: #2196f3;
             border: none;
+            color: white;
             border-radius: 8px;
             cursor: pointer;
         }
 
         button:hover {
-            background: #388e3c;
+            background: #0b7dda;
         }
 
-        .back-link {
-            display: block;
-            margin-top: 15px;
-            text-align: center;
-            text-decoration: none;
-            color: #2196f3;
+        /* 🔷 Info */
+        .info-box {
+            flex: 1;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .info-box p {
+            margin: 10px 0;
+            color: #555;
         }
     </style>
 </head>
@@ -105,29 +121,44 @@
         <a href="{% url 'dashboard' %}">Home</a>
         <a href="/elections/">Elections</a>
         <a href="{% url 'update_profile' %}">Update Profile</a>
-        <a href="{% url 'about'%}">About</a>
+        <a href="{% url 'about' %}">About</a>
         <a href="{% url 'contact' %}">Contact</a>
         <a href="{% url 'logout' %}">Logout</a>
     </div>
 </div>
 
-<!-- 🔷 Form -->
+<!-- 🔷 Content -->
 <div class="container">
-    <h2>Update Profile</h2>
 
-    <form method="post">
-        {% csrf_token %}
+    <!-- 🔥 Contact Form -->
+    <div class="form-box">
+        <h2>Contact Us</h2>
 
-        <label>New Password:</label><br>
-        <input type="password" name="password"><br><br>
+        <form method="post">
+            {% csrf_token %}
 
-        <label>Address:</label><br>
-        <textarea name="address"></textarea><br><br>
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="5" placeholder="Your Message"></textarea>
 
-        <button type="submit">Update</button>
-    </form>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
 
-    <a href="{% url 'dashboard' %}" class="back-link">⬅ Back</a>
+    <!-- 🔥 Contact Info -->
+    <div class="info-box">
+        <h2>Our Details</h2>
+
+        <p><strong>Email:</strong> support@votingsystem.com</p>
+        <p><strong>Phone:</strong> +91 9876543210</p>
+        <p><strong>Location:</strong> India</p>
+
+        <p>
+            Feel free to contact us for any queries regarding the voting system.
+            We are here to help you.
+        </p>
+    </div>
+
 </div>
 
 </body>

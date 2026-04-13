@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Details</title>
+    <title>About</title>
 
     <style>
         body {
@@ -47,48 +47,40 @@
             text-decoration: underline;
         }
 
-        /* 🔷 Form Container */
+        /* 🔷 Content */
         .container {
-            width: 400px;
-            margin: 80px auto;
+            max-width: 900px;
+            margin: 50px auto;
             background: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 12px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         }
 
-        h2 {
+        h1 {
             text-align: center;
         }
 
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
+        p {
+            color: #555;
+            line-height: 1.6;
         }
 
-        button {
-            width: 100%;
-            margin-top: 15px;
-            padding: 10px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+        .features {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
         }
 
-        button:hover {
-            background: #388e3c;
-        }
-
-        .back-link {
-            display: block;
-            margin-top: 15px;
+        .feature {
+            flex: 1;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
             text-align: center;
-            text-decoration: none;
+        }
+
+        .feature h3 {
             color: #2196f3;
         }
     </style>
@@ -105,29 +97,43 @@
         <a href="{% url 'dashboard' %}">Home</a>
         <a href="/elections/">Elections</a>
         <a href="{% url 'update_profile' %}">Update Profile</a>
-        <a href="{% url 'about'%}">About</a>
+        <a href="{% url 'about' %}">About</a>
         <a href="{% url 'contact' %}">Contact</a>
         <a href="{% url 'logout' %}">Logout</a>
     </div>
 </div>
 
-<!-- 🔷 Form -->
+<!-- 🔷 About Content -->
 <div class="container">
-    <h2>Update Profile</h2>
+    <h1>About Online Voting System 🗳️</h1>
 
-    <form method="post">
-        {% csrf_token %}
+    <p>
+        This Online Voting System is designed to provide a secure, transparent,
+        and efficient platform for conducting elections digitally.
+    </p>
 
-        <label>New Password:</label><br>
-        <input type="password" name="password"><br><br>
+    <p>
+        Users can register, participate in elections, and cast their votes securely.
+        Each user is allowed to vote only once per election to ensure fairness.
+    </p>
 
-        <label>Address:</label><br>
-        <textarea name="address"></textarea><br><br>
+    <!-- 🔥 Features -->
+    <div class="features">
+        <div class="feature">
+            <h3>🔐 Secure</h3>
+            <p>Prevents duplicate voting and ensures user authentication.</p>
+        </div>
 
-        <button type="submit">Update</button>
-    </form>
+        <div class="feature">
+            <h3>⚡ Fast</h3>
+            <p>Quick voting process with instant access to elections.</p>
+        </div>
 
-    <a href="{% url 'dashboard' %}" class="back-link">⬅ Back</a>
+        <div class="feature">
+            <h3>📊 Transparent</h3>
+            <p>Admins can view results clearly and accurately.</p>
+        </div>
+    </div>
 </div>
 
 </body>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<h2>Admin Dashboard</h2>
+
+{% for election in elections %}
+    <h3>{{ election.title }}</h3>
+
+    <a href="{% url 'candidate_list' election.id %}">
+        View Candidates
+    </a>
+
+    <br>
+
+    <a href="{% url 'results' election.id %}">
+        View Results
+    </a>
+
+    <hr>
+{% endfor %}
+
+</body>
+</html>
