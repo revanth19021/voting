@@ -84,8 +84,8 @@ voting/
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/voting-system.git
-cd voting-system
+git clone https://github.com/revanth19021/voting
+cd voting
 ```
 
 ---
